@@ -20,6 +20,7 @@ public class Test_01_Check_Environment {
 		//Open url
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get("http://demo.guru99.com/v4/");
+		//check 
 	}
 
 	@Test
