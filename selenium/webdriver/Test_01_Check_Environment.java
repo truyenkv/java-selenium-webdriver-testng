@@ -44,6 +44,13 @@ public class Test_01_Check_Environment {
 	public void TC_04_CheckCommit() {
 		Assert.assertTrue(driver.findElement(By.xpath("//form[@name='frmLogin']")).isDisplayed());
 	}
+	
+	
+	//push from home
+	@Test
+	public void TC_05_PullHomeAndPushAgain() {
+		Assert.assertTrue(driver.findElement(By.xpath("//form[@name='frmLogin']")).isDisplayed());
+	}
 
 	@AfterClass
 	public void afterClass() {
