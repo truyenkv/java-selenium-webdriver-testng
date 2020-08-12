@@ -2,23 +2,27 @@ package webdriver;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_07_TextArea {
+public class Topic_07_08_TextArea {
+	Select select;
 	WebDriver driver;
 	String email, userID, pass, loginUrl;
-	String customerID, customerName, gender, dob, address, city, state, pin, mobileNumber, emailCustomer,
-			passwordCustomer;
+	String customerID, customerName, gender, dob, address, city, state, pin, mobileNumber, emailCustomer, passwordCustomer;
 	By customerNameField = By.name("name");
 	By doBField = By.id("dob");
 	By addressField = By.name("addr");
@@ -40,7 +44,7 @@ public class Topic_07_TextArea {
 		// check
 	}
 
-	@Test
+	//@Test
 	public void TC_01_Get_Account() {
 		// go to get username account
 		email = "truyen" + random() + "@yopmail.com";
@@ -56,7 +60,7 @@ public class Topic_07_TextArea {
 
 	}
 
-	@Test
+	//@Test
 	public void TC_02_Login_And_Verify_Home_Screen() {
 		// go to home screen
 		driver.get("http://demo.guru99.com/v4/");
@@ -67,14 +71,12 @@ public class Topic_07_TextArea {
 		driver.findElement(By.name("btnLogin")).click();
 
 		// Verify the item on Home page
-		Assert.assertEquals(driver.findElement(By.xpath("//tr[@class='heading3']/td")).getText(),
-				"Manger Id : " + userID);
-		Assert.assertEquals(driver.findElement(By.xpath("//marquee[@class='heading3']")).getText(),
-				"Welcome To Manager's Page of Guru99 Bank");
+		Assert.assertEquals(driver.findElement(By.xpath("//tr[@class='heading3']/td")).getText(), "Manger Id : " + userID);
+		Assert.assertEquals(driver.findElement(By.xpath("//marquee[@class='heading3']")).getText(), "Welcome To Manager's Page of Guru99 Bank");
 
 	}
 
-	@Test
+	//@Test
 	public void TC_03_Create_New_Customer() throws ParseException {
 		customerName = "Truyen Kieu";
 		dob = "08/08/2020";
@@ -114,26 +116,18 @@ public class Topic_07_TextArea {
 		// Verify the user information
 		customerID = driver.findElement(By.xpath("//td[text()='Customer ID']/following-sibling::td")).getText();
 		System.out.println(customerID);
-		Assert.assertEquals(
-				driver.findElement(By.xpath("//td[text()='Customer Name']/following-sibling::td")).getText(),
-				customerName);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Gender']/following-sibling::td")).getText(),
-				gender);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Birthdate']/following-sibling::td")).getText(),
-				dateFormat(dob));
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td")).getText(),
-				address.replace("\n", " "));
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Customer Name']/following-sibling::td")).getText(), customerName);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Gender']/following-sibling::td")).getText(), gender);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Birthdate']/following-sibling::td")).getText(), dateFormat(dob));
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td")).getText(), address.replace("\n", " "));
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='City']/following-sibling::td")).getText(), city);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='State']/following-sibling::td")).getText(),
-				state);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='State']/following-sibling::td")).getText(), state);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Pin']/following-sibling::td")).getText(), pin);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Mobile No.']/following-sibling::td")).getText(),
-				mobileNumber);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText(),
-				emailCustomer);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Mobile No.']/following-sibling::td")).getText(), mobileNumber);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText(), emailCustomer);
 	}
 
-	@Test
+	//@Test
 	public void TC_04_Edit_Customer() throws ParseException, InterruptedException {
 
 		// go to edit customer screen
@@ -175,27 +169,91 @@ public class Topic_07_TextArea {
 		Thread.sleep(2000);
 
 		// Verify the value after editing
-		Assert.assertEquals(
-				driver.findElement(By.xpath("//td[text()='Customer Name']/following-sibling::td")).getText(),
-				customerName);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Gender']/following-sibling::td")).getText(),
-				gender);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Birthdate']/following-sibling::td")).getText(),
-				dateFormat(dob));
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td")).getText(),
-				address.replace("\n", " "));
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Customer Name']/following-sibling::td")).getText(), customerName);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Gender']/following-sibling::td")).getText(), gender);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Birthdate']/following-sibling::td")).getText(), dateFormat(dob));
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td")).getText(), address.replace("\n", " "));
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='City']/following-sibling::td")).getText(), city);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='State']/following-sibling::td")).getText(),
-				state);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='State']/following-sibling::td")).getText(), state);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Pin']/following-sibling::td")).getText(), pin);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Mobile No.']/following-sibling::td")).getText(),
-				mobileNumber);
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText(),
-				emailCustomer);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Mobile No.']/following-sibling::td")).getText(), mobileNumber);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText(), emailCustomer);
+	}
+
+	@Test
+	public void TC_05_Handle_Dropdown_List() throws InterruptedException {
+		// open the site
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+
+		select = new Select(driver.findElement(By.id("job1")));
+
+		// check job role is not multiple select
+		Assert.assertFalse(select.isMultiple());
+
+		// Select Mobile Testing by selectByVisibleText
+		select.selectByVisibleText("Mobile Testing");
+
+		Thread.sleep(2000);
+		// check Test is selected is "Mobile Testing"
+		System.out.print(select.getFirstSelectedOption().getText());
+		Assert.assertEquals(select.getFirstSelectedOption().getText(), "Mobile Testing");
+
+		// select Manual Test by value
+		select.selectByValue("manual");
+		Thread.sleep(2000);
+		// check Test is selected is "Mobile Testing"
+		System.out.print(select.getFirstSelectedOption().getText());
+		Assert.assertEquals(select.getFirstSelectedOption().getText(), "Manual Testing");
+
+		select.selectByIndex(9);
+		Thread.sleep(2000);
+		// check Test is selected is "Mobile Testing"
+		System.out.print(select.getFirstSelectedOption().getText());
+		Assert.assertEquals(select.getFirstSelectedOption().getText(), "Functional UI Testing");
+
+		// Check the size is 10
+		List<WebElement> option = select.getOptions();
+		Assert.assertEquals(option.size(), 10);
+
+		select = new Select(driver.findElement(By.id("job2")));
+		// check job role is multiple select
+		Assert.assertTrue(select.isMultiple());
+		
+		List<String> data = new ArrayList();
+		//Select multiple item
+		select.selectByVisibleText("Automation");
+		data.add("Automation");
+		select.selectByVisibleText("Mobile");
+		data.add("Mobile");
+		select.selectByVisibleText("Desktop");
+		data.add("Desktop");
+		
+		//Verify 3 items were added
+		int multil = select.getAllSelectedOptions().size();
+		Assert.assertEquals(multil, 3);
+		
+		List<String> nameAdded = new ArrayList();
+		List<WebElement> optionName = select.getAllSelectedOptions();
+		for(WebElement options: optionName) {
+			System.out.println(options.getText());
+			nameAdded.add(options.getText());
+		}
+		
+		//checck is data = select
+		Assert.assertEquals(data, nameAdded);
+		
+		//de select all
+		select.deselectAll();
+		
+		//Verify no item is select
+		Assert.assertEquals(select.getAllSelectedOptions().size(), 0);
+		
+		
+		
 	}
 
 	// @Test
-	public void TC_05_LoginFormDisplayed() {
+	public void TC_06_LoginFormDisplayed() {
 
 	}
 
