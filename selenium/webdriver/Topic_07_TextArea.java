@@ -1,5 +1,8 @@
 package webdriver;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +17,7 @@ import org.testng.annotations.Test;
 public class Topic_07_TextArea {
 	WebDriver driver;
 	String email, userID, pass, loginUrl;
-	String customerName, gender, dob, address, city, state, pin, mobileNumber, emailCustomer, passwordCustomer;
+	String  customerID, customerName, gender, dob, address, city, state, pin, mobileNumber, emailCustomer, passwordCustomer;
 	By customerNameField = By.name("name");
 	By doBField = By.id("dob");
 	By addressField = By.name("addr");
@@ -25,6 +28,7 @@ public class Topic_07_TextArea {
 	By emailCusField = By.name("emailid");
 	By passCusField = By.name("password");
 	By submitBtn = By.name("sub");
+	
 
 	
 	@BeforeClass
@@ -70,8 +74,21 @@ public class Topic_07_TextArea {
 
 	}
 
-	// @Test
-	public void TC_03_Create_New_Customer() {
+	@Test
+	public void TC_03_Create_New_Customer() throws ParseException {
+		customerName = "Truyen Kieu";
+		dob = "08/08/2020";
+		address = "123 Nguyen Dinh Chieu\nDakao Quan 1\nHo Chi Minh";
+		city = "City";
+		state = "state Quan One";
+		pin = "111111";
+		gender = "male";
+		mobileNumber = "0989988888";
+		emailCustomer = "truyenCus" + random()+ "@yopmail.com";
+		passwordCustomer = "123456";
+		
+		
+		
 		// go to login Page
 		driver.get(loginUrl);
 		// Login with valid username and password
@@ -82,19 +99,52 @@ public class Topic_07_TextArea {
 		//open New Customer screen
 		driver.findElement(By.xpath("//a[text()='New Customer']")).click();
 		
+		//Input data to field
+		driver.findElement(customerNameField).sendKeys(customerName);
+		driver.findElement(doBField).sendKeys(dob);
+		driver.findElement(addressField).sendKeys(address);
+		driver.findElement(cityField).sendKeys(city);
+		driver.findElement(stateField).sendKeys(state);
+		driver.findElement(pinField).sendKeys(pin);
+		driver.findElement(mobileNumField).sendKeys(mobileNumber);
+		driver.findElement(emailCusField).sendKeys(emailCustomer);
+		driver.findElement(passCusField).sendKeys(passwordCustomer);
+		
+		//click submit button
+		driver.findElement(By.name("sub")).click();
+		
+//		Verify the user information
+		customerID = driver.findElement(By.xpath("//td[text()='Customer ID']/following-sibling::td")).getText();
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Customer Name']/following-sibling::td")).getText(), customerName);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Gender']/following-sibling::td")).getText(), gender);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Birthdate']/following-sibling::td")).getText(), dateFormat(dob));
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td")).getText(), address.replace("\n", " "));
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='City']/following-sibling::td")).getText(), city);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='State']/following-sibling::td")).getText(), state);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Pin']/following-sibling::td")).getText(), pin);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Mobile No.']/following-sibling::td")).getText(), mobileNumber);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText(), emailCustomer);
 	}
 
 	// @Test
 	public void TC_04_LoginFormDisplayed() {
+		
 
 	}
-
 	public int random() {
 		Random rand = new Random();
 		return rand.nextInt(100000);
 
 	}
-
+	
+	//Cover date to String
+	public String dateFormat(String date) throws ParseException {
+		SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
+		Date datetime = input.parse(date);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		return format.format(datetime);
+	}
+	
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
