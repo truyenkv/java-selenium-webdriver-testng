@@ -12,13 +12,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class Topic_07_08_TextArea {
+	WebDriverWait explicitWait;
 	Select select;
 	WebDriver driver;
 	String email, userID, pass, loginUrl;
@@ -41,7 +44,7 @@ public class Topic_07_08_TextArea {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		// check
+		
 	}
 
 	//@Test
@@ -253,10 +256,33 @@ public class Topic_07_08_TextArea {
 	}
 
 	// @Test
-	public void TC_06_LoginFormDisplayed() {
+	public void TC_06_Handler_Customer_Drop() {
 
 	}
-
+	
+	public void selectItemInDropDown(String parentLocator, String itemLocator, String expectedItem) {
+//		1. click on parent tab to load all item
+		driver.findElement(By.xpath(parentLocator)).click();
+		
+//		2. Wait until all item is display
+		explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(itemLocator)));
+		
+//		3. Take all items to list
+		List<WebElement> allItem = driver.findElements(By.xpath(itemLocator));
+		
+//		4. Select the item and click
+		for(WebElement item: allItem) {
+			if(item.getText().equals(expectedItem)) {
+				item.click();
+				break;
+			}
+		}
+	}
+	
+	public void sleepInSecond(int time) throws InterruptedException {
+		Thread.sleep(time*1000);
+	}
+	
 	public int random() {
 		Random rand = new Random();
 		return rand.nextInt(900000);
