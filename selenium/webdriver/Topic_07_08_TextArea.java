@@ -265,45 +265,43 @@ public class Topic_07_08_TextArea {
 	@Test
 	public void TC_06_Handler_Customer_Drop() throws InterruptedException {
 //		//goto jquery
-//		driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
-//		//click to dropdown
-//		sleepInSecond(2);
-//		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "5");
-//		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='5']")).isDisplayed());
-//		sleepInSecond(2);
-//		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "1");
-//		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='1']")).isDisplayed());
-//		sleepInSecond(2);
-//		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "19");
-//		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='19']")).isDisplayed());
-//		
+		driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
+		//click to dropdown
+		sleepInSecond(2);
+		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "5");
+		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='5']")).isDisplayed());
+		sleepInSecond(2);
+		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "1");
+		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='1']")).isDisplayed());
+		sleepInSecond(2);
+		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "19");
+		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='19']")).isDisplayed());
+		
 //		//go to Angular
-//		driver.get("https://bit.ly/2UV2vYi");
-//		
-//		sleepInSecond(2);
-//		selectItemInDropDown("//*[@id='games']//span[contains(@class,'e-search-icon')]", "//ul[@id='games_options']/li", "Basketball");
-//		Assert.assertEquals(getHiddenText("select[id='games_hidden'] option"), "Basketball");
-//		sleepInSecond(2);
-//		selectItemInDropDown("//*[@id='games']//span[contains(@class,'e-search-icon')]", "//ul[@id='games_options']/li", "Golf");
-//		Assert.assertEquals(getHiddenText("select[id='games_hidden'] option"), "Golf");
-//		
-//		
+		driver.get("https://bit.ly/2UV2vYi");
+		sleepInSecond(2);
+		selectItemInDropDown("//*[@id='games']//span[contains(@class,'e-search-icon')]", "//ul[@id='games_options']/li", "Basketball");
+		Assert.assertEquals(getHiddenText("select[id='games_hidden'] option"), "Basketball");
+		sleepInSecond(2);
+		selectItemInDropDown("//*[@id='games']//span[contains(@class,'e-search-icon')]", "//ul[@id='games_options']/li", "Golf");
+		Assert.assertEquals(getHiddenText("select[id='games_hidden'] option"), "Golf");
+		
 //		//goto ReactJS
-//		driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
-//		sleepInSecond(2);
-//		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Jenny Hess");
-//		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Jenny Hess']")).isDisplayed());
-//		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Christian");
-//		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Christian']")).isDisplayed());
-//		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Elliot Fu");
-//		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Elliot Fu']")).isDisplayed());
-//		
+		driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+		sleepInSecond(2);
+		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Jenny Hess");
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Jenny Hess']")).isDisplayed());
+		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Christian");
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Christian']")).isDisplayed());
+		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Elliot Fu");
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Elliot Fu']")).isDisplayed());
+		
 		
 		//goto edit editable
-//		driver.get("http://indrimuska.github.io/jquery-editable-select/");
-//		sendKeyToDrop("//div[@id='default-place']/input", "Audi");
-//		Assert.assertEquals(getHiddenText("#default-place li.es-visible"), "Audi");
-//		
+		driver.get("http://indrimuska.github.io/jquery-editable-select/");
+		sendKeyToDrop("//div[@id='default-place']/input", "Audi");
+		Assert.assertEquals(getHiddenText("#default-place li.es-visible"), "Audi");
+		
 		//go multiple select
 		driver.get("http://multiple-select.wenzhixin.net.cn/examples#basic.html");
 		
