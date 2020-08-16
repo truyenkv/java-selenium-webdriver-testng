@@ -9,9 +9,12 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,6 +27,7 @@ public class Topic_07_08_TextArea {
 	WebDriverWait explicitWait;
 	Select select;
 	WebDriver driver;
+	JavascriptExecutor jsExcute;
 	String email, userID, pass, loginUrl;
 	String customerID, customerName, gender, dob, address, city, state, pin, mobileNumber, emailCustomer, passwordCustomer;
 	By customerNameField = By.name("name");
@@ -41,9 +45,12 @@ public class Topic_07_08_TextArea {
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/libraries/chromedriver");
-		driver = new ChromeDriver();
+		//driver = new ChromeDriver();
+		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		explicitWait = new WebDriverWait(driver, 30);
+		jsExcute = (JavascriptExecutor) driver;
 		
 	}
 
@@ -183,7 +190,7 @@ public class Topic_07_08_TextArea {
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText(), emailCustomer);
 	}
 
-	@Test
+	//@Test
 	public void TC_05_Handle_Dropdown_List() throws InterruptedException {
 		// open the site
 		driver.get("https://automationfc.github.io/basic-form/index.html");
@@ -255,15 +262,119 @@ public class Topic_07_08_TextArea {
 		
 	}
 
-	// @Test
-	public void TC_06_Handler_Customer_Drop() {
-
+	@Test
+	public void TC_06_Handler_Customer_Drop() throws InterruptedException {
+//		//goto jquery
+//		driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
+//		//click to dropdown
+//		sleepInSecond(2);
+//		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "5");
+//		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='5']")).isDisplayed());
+//		sleepInSecond(2);
+//		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "1");
+//		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='1']")).isDisplayed());
+//		sleepInSecond(2);
+//		selectItemInDropDown("//span[@id='number-button']", "//li[@class='ui-menu-item']/div", "19");
+//		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='19']")).isDisplayed());
+//		
+//		//go to Angular
+//		driver.get("https://bit.ly/2UV2vYi");
+//		
+//		sleepInSecond(2);
+//		selectItemInDropDown("//*[@id='games']//span[contains(@class,'e-search-icon')]", "//ul[@id='games_options']/li", "Basketball");
+//		Assert.assertEquals(getHiddenText("select[id='games_hidden'] option"), "Basketball");
+//		sleepInSecond(2);
+//		selectItemInDropDown("//*[@id='games']//span[contains(@class,'e-search-icon')]", "//ul[@id='games_options']/li", "Golf");
+//		Assert.assertEquals(getHiddenText("select[id='games_hidden'] option"), "Golf");
+//		
+//		
+//		//goto ReactJS
+//		driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+//		sleepInSecond(2);
+//		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Jenny Hess");
+//		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Jenny Hess']")).isDisplayed());
+//		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Christian");
+//		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Christian']")).isDisplayed());
+//		selectItemInDropDown("//i[@class='dropdown icon']", "//span[@class='text']", "Elliot Fu");
+//		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='divider text' and text()='Elliot Fu']")).isDisplayed());
+//		
+		
+		//goto edit editable
+//		driver.get("http://indrimuska.github.io/jquery-editable-select/");
+//		sendKeyToDrop("//div[@id='default-place']/input", "Audi");
+//		Assert.assertEquals(getHiddenText("#default-place li.es-visible"), "Audi");
+//		
+		//go multiple select
+		driver.get("http://multiple-select.wenzhixin.net.cn/examples#basic.html");
+		
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		String[] month = {"January", "April", "May", "June", "July"};
+		selectMultipleElement("//div[@id='example']/div/div[2]//button","//div[@id='example']/div/div[2]//ul//li//input/following-sibling::span",month);
+		//div[@id='example']/div/div[2]//button[@class='ms-choice']
+		checkItemSelected(month);
+		
 	}
 	
-	public void selectItemInDropDown(String parentLocator, String itemLocator, String expectedItem) {
+	public void selectMultipleElement(String parentLocator, String allElementXpath, String []listSelect) throws InterruptedException {
+		driver.findElement(By.xpath(parentLocator)).click();
+		sleepInSecond(1);
+		explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(allElementXpath)));
+		List<WebElement> allElements = driver.findElements(By.xpath(allElementXpath));
+		System.out.println("Number of element: "+ allElements.size());
+		
+		//Duyet tat ca cac phan tu den khi thoa dieu kien
+		for(WebElement item: allElements) {
+			for(String select: listSelect) {
+				if(item.getText().equals(select)) {
+					//scroll to view element
+					jsExcute.executeScript("arguments[0].scrollIntoView(true)", item);
+					sleepInSecond(1);
+					//thuc hien click
+					jsExcute.executeScript("arguments[0].click()", item);
+					sleepInSecond(1);
+				}
+				List<WebElement> itemSelected = driver.findElements(By.xpath("//li[@class='selected']"));
+				System.out.print("List item selected: "+ itemSelected.size());
+				if(listSelect.length == itemSelected.size()) {
+					break;
+				}
+			}
+		}
+	}
+	
+	public boolean checkItemSelected(String [] itemSelectedText) {
+		List<WebElement> itemSelected = driver.findElements(By.xpath("//li[@class='selected']"));
+		int numberItemSelect = itemSelected.size();
+		String allItemSelected = driver.findElement(By.xpath("//div[@id='example']/div/div[2]//button/span")).getText();
+		if(numberItemSelect <= 3 && numberItemSelect > 0) {
+			for(String item: itemSelectedText) {
+				if(allItemSelected.contains(item)){
+					break;
+				}
+			}
+			return true;
+		}
+		else {
+			return driver.findElement(By.xpath("//div[@id='example']/div/div[2]//button/span[text()='"+ numberItemSelect +" of 12 selected']")).isDisplayed();
+		}
+		
+		
+		
+	}
+	
+	public void sendKeyToDrop(String locator, String value) throws InterruptedException {
+		driver.findElement(By.xpath(locator)).clear();
+		sleepInSecond(1);
+		driver.findElement(By.xpath(locator)).sendKeys(value);
+		sleepInSecond(1);
+		driver.findElement(By.xpath(locator)).sendKeys(Keys.TAB);
+		sleepInSecond(1);
+	}
+	
+	public void selectItemInDropDown(String parentLocator, String itemLocator, String expectedItem) throws InterruptedException {
 //		1. click on parent tab to load all item
 		driver.findElement(By.xpath(parentLocator)).click();
-		
+		sleepInSecond(2);
 //		2. Wait until all item is display
 		explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(itemLocator)));
 		
@@ -272,9 +383,16 @@ public class Topic_07_08_TextArea {
 		
 //		4. Select the item and click
 		for(WebElement item: allItem) {
-			if(item.getText().equals(expectedItem)) {
+			String actual = item.getText();
+			if(actual.equals(expectedItem)) {
+				
+				//wait and scroll to element
+				sleepInSecond(1);
+				jsExcute.executeScript("arguments[0].scrollIntoView(true)", item);
+				
 				item.click();
-				break;
+				sleepInSecond(1);
+				break; 
 			}
 		}
 	}
@@ -296,8 +414,13 @@ public class Topic_07_08_TextArea {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(datetime);
 	}
+	
+	//get hidden text
+	public String getHiddenText(String locator) {
+		return (String) jsExcute.executeScript("return document.querySelector(\""+locator+ "\").textContent");
+	}
 
-	@AfterClass
+	//@AfterClass
 	public void afterClass() {
 		driver.quit();
 	}
