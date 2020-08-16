@@ -11,7 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_11_Webdriver_API {
+public class Topic_06_Webdriver_API {
 	WebDriver driver;
 
 	@BeforeClass
