@@ -418,7 +418,7 @@ public class Topic_07_08_TextArea {
 		return (String) jsExcute.executeScript("return document.querySelector(\""+locator+ "\").textContent");
 	}
 
-	//@AfterClass
+	@AfterClass
 	public void afterClass() {
 		driver.quit();
 	}
