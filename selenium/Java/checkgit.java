@@ -27,7 +27,7 @@ public class checkgit {
 	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/libraries/chromedriver");
 		 driver = new ChromeDriver();
-//		driver = new FirefoxDriver();
+		driver = new FirefoxDriver();
 //		driver.manage().window().maximize();
 //		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 //		explicitWait = new WebDriverWait(driver, 30);
