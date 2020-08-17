@@ -31,6 +31,7 @@ public class checkgit {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		explicitWait = new WebDriverWait(driver, 30);
+		//nothing
 	}
 
 	@AfterClass
