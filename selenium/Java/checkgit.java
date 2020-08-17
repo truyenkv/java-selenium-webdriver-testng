@@ -29,16 +29,9 @@ public class checkgit {
 		 driver = new ChromeDriver();
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-<<<<<<< HEAD
-//		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-//		explicitWait = new WebDriverWait(driver, 30);
-		//nothing
-=======
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		explicitWait = new WebDriverWait(driver, 30);
-		
-		//goi qua ben kia xem sao
->>>>>>> branch 'master' of https://github.com/truyenkv/java-selenium-webdriver-testng
+		//nothing
 	}
 
 	@AfterClass
