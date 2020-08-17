@@ -29,8 +29,8 @@ public class checkgit {
 		 driver = new ChromeDriver();
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-//		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-//		explicitWait = new WebDriverWait(driver, 30);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		explicitWait = new WebDriverWait(driver, 30);
 	}
 
 	@AfterClass
