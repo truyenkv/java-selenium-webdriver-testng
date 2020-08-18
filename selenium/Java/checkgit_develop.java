@@ -35,8 +35,13 @@ public class checkgit_develop {
 	}
 	
 	@Test
-	public void openbrowser() {
+	public void opengoogle() {
 		driver.get("https://google.com.vn");
+	}
+	
+	@Test
+	public void openfacebook() {
+		driver.get("facebook.com");
 	}
 
 	@AfterClass
