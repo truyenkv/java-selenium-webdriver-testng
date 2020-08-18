@@ -40,6 +40,11 @@ public class checkgit_develop {
 	}
 	
 	@Test
+	public void openyoahoo() {
+		driver.get("yahoo.com");
+	}
+	
+	@Test
 	public void openfacebook() {
 		driver.get("facebook.com");
 	}
