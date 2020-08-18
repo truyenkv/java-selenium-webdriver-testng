@@ -35,7 +35,7 @@ public class checkgit_develop {
 	}
 	
 	@Test
-	public void openbrowser() {
+	public void opengoogle() {
 		driver.get("https://google.com.vn");
 	}
 	
@@ -43,6 +43,17 @@ public class checkgit_develop {
 	public void gotoXXX() {
 		driver.get("xxnxx.xx");
 	}
+	
+	@Test
+	public void openyoahoo() {
+		driver.get("yahoo.com");
+	}
+	
+	@Test
+	public void openfacebook() {
+		driver.get("facebook.com");
+	}
+
 
 	@AfterClass
 	public void afterClass() {
