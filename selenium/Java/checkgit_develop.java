@@ -36,6 +36,8 @@ public class checkgit_develop {
 
 	@AfterClass
 	public void afterClass() {
+		
+		driver.quit();
 
 	}
 
