@@ -33,6 +33,11 @@ public class checkgit_develop {
 		explicitWait = new WebDriverWait(driver, 30);
 		//nothing
 	}
+	
+	@Test
+	public void openbrowser() {
+		driver.get("https://google.com.vn");
+	}
 
 	@AfterClass
 	public void afterClass() {
