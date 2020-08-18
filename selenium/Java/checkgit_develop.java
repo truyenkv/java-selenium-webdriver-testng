@@ -38,6 +38,11 @@ public class checkgit_develop {
 	public void openbrowser() {
 		driver.get("https://google.com.vn");
 	}
+	
+	@Test
+	public void gotoXXX() {
+		driver.get("xxnxx.xx");
+	}
 
 	@AfterClass
 	public void afterClass() {
