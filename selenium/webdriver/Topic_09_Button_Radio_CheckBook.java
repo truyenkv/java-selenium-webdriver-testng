@@ -26,7 +26,7 @@ public class Topic_09_Button_Radio_CheckBook {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-	@Test
+	//@Test
 	public void TC_01_ValidateCurrentUrl() throws InterruptedException {
 		//go to fahasha
 		driver.get("https://www.fahasa.com/customer/account/create");
@@ -60,7 +60,26 @@ public class Topic_09_Button_Radio_CheckBook {
 	}
 
 	//@Test
-	public void TC_02_ValidatePageTitle() {
+	public void TC_02_Default_CheckBox_And_Radio_Button() throws InterruptedException {
+		driver.get("http://demos.telerik.com/kendo-ui/styling/checkboxes");
+		
+		//click and verify checkbox isSelected
+		driver.findElement(By.xpath("//label[text()='Dual-zone air conditioning']")).click();
+		sleepInSecond(2);
+		Assert.assertTrue(driver.findElement(By.xpath("//input[@id='eq5']")).isSelected());
+		
+		//deselect and check
+		driver.findElement(By.xpath("//label[text()='Dual-zone air conditioning']")).click();
+		sleepInSecond(2);
+		Assert.assertFalse(driver.findElement(By.xpath("//input[@id='eq5']")).isSelected());
+		
+		//go to new link
+		driver.get("http://demos.telerik.com/kendo-ui/styling/radios");
+		//click to radio
+		driver.findElement(By.xpath("//label[text()='2.0 Petrol, 147kW']")).click();
+		
+		//check radio button
+		Assert.assertTrue(driver.findElement(By.xpath("//input[@id='engine3']")).isSelected());
 		
 	}
 
