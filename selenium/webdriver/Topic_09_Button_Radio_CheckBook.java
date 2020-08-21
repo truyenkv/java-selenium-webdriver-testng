@@ -1,7 +1,9 @@
 package webdriver;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +17,8 @@ import org.testng.annotations.Test;
 public class Topic_09_Button_Radio_CheckBook {
 	WebDriver driver;
 	JavascriptExecutor javaScript;
+	Alert alert;
+	String chromeAuto = System.getProperty("user.dir") + "/autoITScript/authen_chrome.exe";
 
 	@BeforeClass
 	public void beforeClass() {
@@ -83,39 +87,95 @@ public class Topic_09_Button_Radio_CheckBook {
 
 	}
 
-	@Test
+	// @Test
 	public void TC_03_Custome_Radio_CheckBox() throws InterruptedException {
-		//got to site
+		// got to site
 		driver.get("https://material.angular.io/components/radio/examples");
 		sleepInSecond(2);
-		//click to Radio button and check
+		// click to Radio button and check
 		jsClickElement("//div[text()=' Summer ']/preceding-sibling::div/input");
 		Assert.assertTrue(driver.findElement(By.xpath("//div[text()=' Summer ']/preceding-sibling::div/input")).isSelected());
-		
-		//go to new site
+
+		// go to new site
 		driver.get("https://material.angular.io/components/checkbox/examples");
-		//click to check box
+		// click to check box
 		jsClickElement("//span[text()='Checked']/preceding-sibling::div/input");
 		jsClickElement("//span[text()='Indeterminate']/preceding-sibling::div/input");
 		sleepInSecond(1);
-		
-		//Verify the checkbox isselected()
+
+		// Verify the checkbox isselected()
 		Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Indeterminate']/preceding-sibling::div/input")).isSelected());
 		Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Checked']/preceding-sibling::div/input")).isSelected());
-		
+
 		jsClickElement("//span[text()='Checked']/preceding-sibling::div/input");
 		jsClickElement("//span[text()='Indeterminate']/preceding-sibling::div/input");
 		sleepInSecond(1);
 		Assert.assertFalse(driver.findElement(By.xpath("//span[text()='Indeterminate']/preceding-sibling::div/input")).isSelected());
 		Assert.assertFalse(driver.findElement(By.xpath("//span[text()='Checked']/preceding-sibling::div/input")).isSelected());
-		
-		
-		
-		
+
 	}
 
-	// @Test
-	public void TC_04_LoginFormDisplayed() {
+//	@Test
+	public void TC_04_Accept_Alert() throws InterruptedException {
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+		// click the button
+		driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
+		sleepInSecond(1);
+		alert = driver.switchTo().alert();
+		Assert.assertEquals(alert.getText(), "I am a JS Alert");
+		alert.accept();
+		sleepInSecond(1);
+		Assert.assertEquals(driver.findElement(By.id("result")).getText(), "You clicked an alert successfully");
+
+	}
+
+//	@Test
+	public void TC_05_Confirm_Alert() throws InterruptedException {
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+		// click the button
+		driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
+		sleepInSecond(1);
+		alert = driver.switchTo().alert();
+		alert.dismiss();
+		sleepInSecond(1);
+		Assert.assertEquals(driver.findElement(By.id("result")).getText(), "You clicked: Cancel");
+
+	}
+
+//	@Test
+	public void TC_06_Promop_Alert() throws InterruptedException {
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+		// click the button
+		driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
+		sleepInSecond(1);
+		alert = driver.switchTo().alert();
+		alert.sendKeys("Truyen");
+		sleepInSecond(2);
+		alert.accept();
+		sleepInSecond(1);
+		Assert.assertEquals(driver.findElement(By.id("result")).getText(), "You entered: Truyen");
+
+	}
+
+	@Test
+	public void TC_07_Authenticate() {
+		String username = "admin";
+		String password = "admin";
+		String url = "http://" + username + ":" + password + "@the-internet.herokuapp.com/basic_auth";
+		driver.get(url);
+		Assert.assertEquals(driver.findElement(By.xpath("//div[@class='example']/p")).getText(), "Congratulations! You must have the proper credentials.");
+
+	}
+
+	 @Test
+	public void TC_08_Authenticate_AutoIt() throws IOException {
+		String username = "admin";
+		String password = "admin";
+		String url = "http://the-internet.herokuapp.com/basic_auth";
+		if(driver.toString().contains("chrome")) {
+			Runtime.getRuntime().exec(new String[] {chromeAuto, username, password});
+		}
+		driver.get(url);
 
 	}
 
@@ -132,11 +192,11 @@ public class Topic_09_Button_Radio_CheckBook {
 		WebElement element = driver.findElement(By.xpath(locator));
 		javaScript.executeScript("arguments[0].removeAttribute('disabled')", element);
 	}
-	
+
 	public void jsClickElement(String locator) {
 		WebElement element = driver.findElement(By.xpath(locator));
 		javaScript.executeScript("arguments[0].click()", element);
 
 	}
-	
+
 }

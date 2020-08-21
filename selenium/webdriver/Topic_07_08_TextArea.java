@@ -228,7 +228,7 @@ public class Topic_07_08_TextArea {
 		// check job role is multiple select
 		Assert.assertTrue(select.isMultiple());
 		
-		List<String> data = new ArrayList();
+		List<String> data = new ArrayList<>();
 		//Select multiple item
 		select.selectByVisibleText("Automation");
 		data.add("Automation");
@@ -241,7 +241,7 @@ public class Topic_07_08_TextArea {
 		int multil = select.getAllSelectedOptions().size();
 		Assert.assertEquals(multil, 3);
 		
-		List<String> nameAdded = new ArrayList();
+		List<String> nameAdded = new ArrayList<>();
 		List<WebElement> optionName = select.getAllSelectedOptions();
 		for(WebElement options: optionName) {
 			System.out.println(options.getText());
