@@ -17,11 +17,8 @@ public class Template {
 	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/libraries/chromedriver");
 		driver = new ChromeDriver();
-		//Open url
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get("");
-		//check 
 	}
 
 	@Test
