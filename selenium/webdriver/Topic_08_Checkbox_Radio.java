@@ -22,7 +22,7 @@ public class Topic_08_Checkbox_Radio {
 	By firstCheckbox = By.xpath("//input[@value='Anemia']");
 	By secondCheckbox = By.xpath("//input[@value='Asthma']");
 	By thirdCheckbox = By.xpath("//input[@value='Arthritis']");
-	By allChechboxes=By.xpath("//input[@type='checkbox']");
+	By allChechboxes= By.xpath("//input[@type='checkbox']");
 
 	// Radio
 	By firtRadio = By.xpath("//input[@value='3-4 days']");
@@ -98,14 +98,14 @@ public class Topic_08_Checkbox_Radio {
 		for(WebElement checkbox:Checkboxes) {
 			checkbox.click();
 			Thread.sleep(2000);
-			Assert.assertTrue(checkbox.isSelected());
+			//Assert.assertTrue(checkbox.isSelected());
 		}
 		//Verify selected
-		//for(WebElement checkbox:Checkboxes)
-		//{
-		//	Assert.assertTrue(checkbox.isSelected());
+		for(WebElement checkbox:Checkboxes)
+		{
+			Assert.assertTrue(checkbox.isSelected());
 			
-		//}
+		}
 		//Deselected
 		for(WebElement checkbox:Checkboxes) {
 			checkbox.click();
