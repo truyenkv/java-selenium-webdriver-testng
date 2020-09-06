@@ -14,15 +14,8 @@ import org.testng.annotations.Test;
 
 public class Template {
 	WebDriver driver;
-	JavascriptExecutor jsExecutor;
-	String source = System.getProperty("user.dir");
-	String image1 = "image1.jpg";
-	String image2 = "image2.jpg";
-	String image3 = "image3.jpg";
-	String image_1_Path = source + "/upload/" + image1;
-	String image_2_Path = source + "/upload/" + image2;
-	String image_3_Path = source + "/upload/" + image3;
-
+	
+	
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/libraries/chromedriver");
