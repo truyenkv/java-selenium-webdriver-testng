@@ -22,7 +22,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_07_08_TextArea {
+public class Topic_07_08_TextArea_DropDown {
 	WebDriverWait explicitWait;
 	Select select;
 	WebDriver driver;
