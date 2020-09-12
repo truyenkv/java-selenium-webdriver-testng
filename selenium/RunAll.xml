@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="SuiteName" parallel="suites" thread-count="2">
+	<suite-files>
+		<suite-file path="MoreBrowse2.xml"/>
+		<suite-file path="MoreBrowse.xml"/>
+	</suite-files>
+</suite> <!-- Suite -->

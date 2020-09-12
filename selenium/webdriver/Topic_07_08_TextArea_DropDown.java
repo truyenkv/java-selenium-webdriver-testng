@@ -206,7 +206,7 @@ public class Topic_07_08_TextArea_DropDown {
 		// check Test is selected is "Mobile Testing"
 		System.out.print(select.getFirstSelectedOption().getText());
 		Assert.assertEquals(select.getFirstSelectedOption().getText(), "Mobile Testing");
-
+		
 		// select Manual Test by value
 		select.selectByValue("manual");
 		Thread.sleep(2000);

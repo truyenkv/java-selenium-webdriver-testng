@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+<packet>
+<test name="Test">
+
+	<!-- Run by class -->
+    <classes>
+	    <class name="TestNG.Topic_06"/>
+	 	<class name="TestNG.Topic_03"/>
+    </classes> 
+    
+    <!-- run the package with group -->
+    <!-- <packages>
+    	<package name="TestNG"/>
+    </packages>
+    
+    <groups>
+    	<run>
+    		<include name="run"></include>
+    	</run>
+    </groups> -->
+    
+    
+    
+  </test> <!-- Test -->
+</packet>
+  
+</suite> <!-- Suite -->
